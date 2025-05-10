@@ -6,7 +6,7 @@ import (
 )
 
 func (tb *TelegramBot) HandleCommands() {
-	args_text := tb.update.Message.CommandArguments()
+	args := tb.update.Message.CommandArguments()
 
 	switch tb.update.Message.Command() {
 	case "start":
@@ -16,7 +16,7 @@ func (tb *TelegramBot) HandleCommands() {
 		tb.HelpCommand()
 
 	case "news":
-		tb.NewsCommand(args_text)
+		tb.NewsCommand(args)
 	}
 }
 
