@@ -1,30 +1,37 @@
 package main
 
 import (
-	"Gideon/actions"
-	"Gideon/bot"
-	"Gideon/config"
-	"Gideon/handler"
-	"log"
+	"Gideon/internal/bot"
+	. "Gideon/internal/config"
+	"Gideon/internal/utils/httpproxy"
+	"Gideon/internal/utils/logging"
+
+	"github.com/sirupsen/logrus"
 )
 
-// main function
 func main() {
-	config.ReadConfig()
-
-	bot, err := bot.Init()
-
+	err := AppConfig.LoadConfig()
 	if err != nil {
-		log.Fatal("Could not initiate the bot !")
-		return
+		logrus.Fatalf("failed to load config ➜ %v", err)
 	}
 
-	log.Printf("Authorized on account : %s", bot.Self.UserName)
+	logrus.Info("config file loaded successfully.")
 
-	newsReader := actions.NewNewsReader(config.GlobalConfig.NewsAPIToken)
+	err = logging.SetupLogger()
+	if err != nil {
+		logrus.Warnf("failed to setup custom logger, switching to default ➜ %v", err)
+	}
 
-	log.Println("Beep boop Beep zhzhzh ...")
-	log.Println("Receiving Updates ...")
+	err = httpproxy.SetupHTTPClient()
+	if err != nil {
+		logrus.Warnf("failed to setup custom httpclient, switching to default ➜ %v", err)
+	}
 
-	handler.HandleUpdates(bot, newsReader)
+	tb, err := bot.InitBot()
+	if err != nil {
+		logrus.Fatalf("failed to initiate telegram bot ➜ %v", err)
+	}
+
+	logrus.Info("listening for updates ...")
+	tb.StartUpdater()
 }

@@ -1,0 +1,16 @@
+
+proxy:
+  enabled: false                         
+  url: "socks5://127.0.0.1:1080"        
+  no_proxy: "localhost,127.0.0.1"       
+
+logging:
+  enabled: true                         
+  level: "trace"                        
+
+news_reader:
+  api_key: <API_KEY> 
+ 
+telegram_bot:
+  api_token : <API_TOKEN> 
+  api_endpoint : "https://api.telegram.org/bot%s/%s" 
