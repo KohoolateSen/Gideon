@@ -32,7 +32,7 @@ relevant news for you! Soon, it will offer even more features.
  ```
 - Open the configuration file with a text editor:
  ```
- nano ./config/config.yaml
+ nano ./internal/config/config.yaml
  ```
 - Insert your API tokens in the appropriate places.
 - Optionally, adjust other configuration parameters like proxies.
@@ -43,24 +43,33 @@ relevant news for you! Soon, it will offer even more features.
 **4. Use the Bot Commands**
 - Available commands:
   - `/news`
-  - `/start` (Customizable output)
-  - `/help`  (Customizable output)
+  - `/start`
+  - `/help`  
     
 - Command format:
 ```
-/news <SUBJECT> <SORT-BY> <RESULT-NUMBER (default is 0)>
+/news <SUBJECT>
 ```
 
 - Examples:
 ```
-/news bitcoin relevancy 0
+/news bitcoin
 ```
 ```
-/news tesla publishedAt 0
+/news tesla
 ```
 
+# InlineMode 
+You can also access the latest news articles in any chat
+without adding the bot—just use it inline.
 
-# Limitations & Notes :
+- Example :
+```
+@RealGideonBot news@tesla
+``` 
+then choose & send your desired article.
+
+# Limitations & Notes 
 
  - **Note 1 :**
    Once you use the /news command,
@@ -78,7 +87,12 @@ relevant news for you! Soon, it will offer even more features.
    which may include gibberish and extra tags.
    Future updates will address this issue for improved accuracy.
 
-# Contributions : 
+  - **Note 4:**
+  Due to current Telegram bot limitations, navigation and reading buttons are not available in inline mode.
+  To read an article, you first need to select and send it via inline mode,
+  then open the article's webpage directly within Telegram.
+
+# Contributions 
 If you encounter any problems or bugs with the project
 or if you are interested in contributing,
 please open an issue to let me know about your idea,
