@@ -39,6 +39,9 @@ relevant news for you! Soon, it will offer even more features.
 - Save your changes.
 
 **3. Start the Bot**
+```
+go run cmd/main.go
+```
 
 **4. Use the Bot Commands**
 - Available commands:
